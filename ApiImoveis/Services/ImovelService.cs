@@ -30,6 +30,20 @@ namespace ApiImoveis.Services
             return imovel.Id;
         }
 
+        public Proprietario GetProprietarioById(int proprietarioId)
+        {
+            return _imoveis.Select(imovel => imovel.Proprietario).FirstOrDefault(proprietario => proprietario.Id == proprietarioId);
+        }
+
+        public int AddImovelFromRegisteredOwner(Imovel imovel, int proprietarioId)
+        {
+            imovel.Id = ++_nextId;
+            Proprietario proprietario = GetProprietarioById(proprietarioId);
+            imovel.Proprietario = proprietario;
+            _imoveis.Add(imovel);
+            return imovel.Id;
+        }
+
         public void DeleteImovel(int id)
         {
             var imovelToRemove = _imoveis.FirstOrDefault(imovel => imovel.Id == id);
@@ -53,14 +67,15 @@ namespace ApiImoveis.Services
 
             var existingImovel = _imoveis.FirstOrDefault(imovel => imovel.Id == id);
 
-            existingImovel.Tipo = imovel.Tipo;
-            existingImovel.Endereco = imovel.Endereco;
-            existingImovel.QtdQuartos = imovel.QtdQuartos;
-            existingImovel.QtdBanheiros = imovel.QtdBanheiros;
-            existingImovel.QtdVagasGaragem = imovel.QtdVagasGaragem;
-            existingImovel.Status = imovel.Status;
-            existingImovel.ValorImovel = imovel.ValorImovel;
-            existingImovel.ValorAluguel = imovel.ValorAluguel;
+            foreach (var property in typeof(Imovel).GetProperties())
+            {
+                if (property.Name == "Id")
+                    continue;
+
+                var value = property.GetValue(imovel);
+                if (value != null)
+                    property.SetValue(existingImovel, value);
+            }
 
             return existingImovel.Id;
         }

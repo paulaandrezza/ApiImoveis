@@ -34,6 +34,14 @@ namespace ApiImoveis.Controllers
             return CreatedAtRoute("GetImovelById", new { id }, imovel);
         }
 
+        [HttpPost("{proprietarioId}", Name = "AddImovelFromRegisteredOwner")]
+        public IActionResult AddImovelFromRegisteredOwner([FromRoute] int proprietarioId, [FromBody] Imovel imovel)
+        {
+            int id = _imovelService.AddImovelFromRegisteredOwner(imovel, proprietarioId);
+            return CreatedAtRoute("GetImovelById", new { id }, imovel);
+        }
+
+
         [HttpPatch("{id}", Name = "UpdateImovel")]
         public IActionResult UpdateImovel([FromRoute] int id, [FromBody] Imovel imovel)
         {
@@ -42,7 +50,7 @@ namespace ApiImoveis.Controllers
                 return NotFound();
 
             _imovelService.UpdateImovel(id, imovel);
-            return Ok(imovel);
+            return Ok(new { message = "Imóvel atualizado com sucesso." });
         }
 
         [HttpDelete("{id}", Name = "DeleteImovel")]
