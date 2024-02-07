@@ -18,7 +18,7 @@ namespace ApiImoveis.Controllers
 
 
         [HttpGet("{id}", Name = "GetImovelById")]
-        public IActionResult GetImovelById(int id)
+        public IActionResult GetImovelById([FromRoute] int id)
         {
             var imovel = _imovelService.GetImovelById(id);
             if (imovel == null)
@@ -29,14 +29,14 @@ namespace ApiImoveis.Controllers
         }
 
         [HttpPost(Name = "AddImovel")]
-        public IActionResult AddImovel(Imovel imovel)
+        public IActionResult AddImovel([FromBody] Imovel imovel)
         {
             int id = _imovelService.AddImovel(imovel);
             return CreatedAtRoute("GetImovelById", new { id }, imovel);
         }
 
         [HttpPatch("{id}", Name = "UpdateImovel")]
-        public IActionResult UpdateImovel(int id, Imovel imovel)
+        public IActionResult UpdateImovel([FromRoute] int id, [FromBody] Imovel imovel)
         {
             var existingImovel = _imovelService.GetImovelById(id);
             if (existingImovel == null)
@@ -47,7 +47,7 @@ namespace ApiImoveis.Controllers
         }
 
         [HttpDelete("{id}", Name = "DeleteImovel")]
-        public IActionResult DeleteImovel(int id)
+        public IActionResult DeleteImovel([FromRoute] int id)
         {
             var existingImovel = _imovelService.GetImovelById(id);
             if (existingImovel == null)
