@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiImoveis.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ImovelController : ControllerBase
     {
         private readonly ImovelService _imovelService = new ImovelService();

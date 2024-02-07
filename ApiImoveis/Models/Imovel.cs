@@ -4,9 +4,10 @@ namespace ApiImoveis.Models
 {
     public class Imovel
     {
-        public Imovel(int id, TipoImovel tipo, Endereco endereco, int qtdQuartos, int qtdBanheiros, int qtdVagasGaragem, StatusDisponibilidade[] status)
+        public Imovel(int id, Proprietario proprietario, TipoImovel tipo, Endereco endereco, int qtdQuartos, int qtdBanheiros, int qtdVagasGaragem, StatusDisponibilidade[] status)
         {
             Id = id;
+            Proprietario = proprietario;
             Tipo = tipo;
             Endereco = endereco;
             QtdQuartos = qtdQuartos;
@@ -16,6 +17,7 @@ namespace ApiImoveis.Models
         }
 
         public int Id { get; set; }
+        public Proprietario Proprietario { get; set; }
         public TipoImovel Tipo { get; set; }
         public Endereco Endereco { get; set; }
         public decimal? ValorImovel { get; set; }
