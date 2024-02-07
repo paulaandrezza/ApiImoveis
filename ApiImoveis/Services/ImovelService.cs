@@ -22,15 +22,16 @@ namespace ApiImoveis.Services
         };
         private static int _nextId = 1;
         private static int _nextUserId = 1;
-        public async Task<int> AddImovel(Imovel imovel)
+        public int AddImovel(Imovel imovel)
+        //public async Task<int> AddImovel(Imovel imovel)
         {
             imovel.Id = ++_nextId;
             imovel.Proprietario.Id = ++_nextUserId;
 
-            var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://brasilapi.com.br/api/cep/v1/");
+            //var httpClient = new HttpClient();
+            //httpClient.BaseAddress = new Uri("https://brasilapi.com.br/api/cep/v1/");
 
-            var request = httpClient.GetAsync(imovel.Endereco.CEP);
+            //var request = httpClient.GetAsync(imovel.Endereco.CEP);
 
             // TODO: implementar brasilapi
 
