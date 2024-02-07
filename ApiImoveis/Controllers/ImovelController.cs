@@ -22,9 +22,8 @@ namespace ApiImoveis.Controllers
         {
             var imovel = _imovelService.GetImovelById(id);
             if (imovel == null)
-            {
                 return NotFound();
-            }
+
             return Ok(imovel);
         }
 
