@@ -2,9 +2,9 @@
 {
     public class Endereco
     {
-        public Endereco(string cEP, string estado, string cidade, string bairro, string rua, string numero, string? complemento = null)
+        public Endereco(string cep, string estado, string cidade, string bairro, string rua, string numero, string? complemento = null)
         {
-            CEP = cEP;
+            CEP = cep;
             Estado = estado;
             Cidade = cidade;
             Bairro = bairro;

@@ -7,7 +7,7 @@ namespace ApiImoveis.Services.Interface
         Imovel GetImovelById(int id);
         IEnumerable<Imovel> GetAllImoveis();
         int AddImovel(Imovel imovel);
-        string UpdateImovel(int id, Imovel imovel);
-        string DeleteImovel(int id);
+        int UpdateImovel(int id, Imovel imovel);
+        void DeleteImovel(int id);
     }
 }

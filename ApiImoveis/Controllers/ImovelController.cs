@@ -10,10 +10,10 @@ namespace ApiImoveis.Controllers
     {
         private readonly ImovelService _imovelService = new ImovelService();
 
-        [HttpGet(Name = "imovel")]
-        public IEnumerable<Imovel> GetImoveis()
+        [HttpGet(Name = "GetAllImoveis")]
+        public IActionResult GetImoveis()
         {
-            return _imovelService.GetAllImoveis();
+            return Ok(_imovelService.GetAllImoveis());
         }
 
 
@@ -26,6 +26,35 @@ namespace ApiImoveis.Controllers
                 return NotFound();
             }
             return Ok(imovel);
+        }
+
+        [HttpPost(Name = "AddImovel")]
+        public IActionResult AddImovel(Imovel imovel)
+        {
+            int id = _imovelService.AddImovel(imovel);
+            return CreatedAtRoute("GetImovelById", new { id }, imovel);
+        }
+
+        [HttpPatch("{id}", Name = "UpdateImovel")]
+        public IActionResult UpdateImovel(int id, Imovel imovel)
+        {
+            var existingImovel = _imovelService.GetImovelById(id);
+            if (existingImovel == null)
+                return NotFound();
+
+            _imovelService.UpdateImovel(id, imovel);
+            return Ok(imovel);
+        }
+
+        [HttpDelete("{id}", Name = "DeleteImovel")]
+        public IActionResult DeleteImovel(int id)
+        {
+            var existingImovel = _imovelService.GetImovelById(id);
+            if (existingImovel == null)
+                return NotFound();
+
+            _imovelService.DeleteImovel(id);
+            return Ok(new { message = "Imóvel excluído com sucesso." });
         }
     }
 }
