@@ -35,10 +35,9 @@ namespace ApiImoveis.Services
             return _imoveis.Select(imovel => imovel.Proprietario).FirstOrDefault(proprietario => proprietario.Id == proprietarioId);
         }
 
-        public int AddImovelFromRegisteredOwner(Imovel imovel, int proprietarioId)
+        public int AddImovelFromRegisteredOwner(Imovel imovel, Proprietario proprietario)
         {
             imovel.Id = ++_nextId;
-            Proprietario proprietario = GetProprietarioById(proprietarioId);
             imovel.Proprietario = proprietario;
             _imoveis.Add(imovel);
             return imovel.Id;

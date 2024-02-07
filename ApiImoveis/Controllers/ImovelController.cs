@@ -37,7 +37,10 @@ namespace ApiImoveis.Controllers
         [HttpPost("{proprietarioId}", Name = "AddImovelFromRegisteredOwner")]
         public IActionResult AddImovelFromRegisteredOwner([FromRoute] int proprietarioId, [FromBody] Imovel imovel)
         {
-            int id = _imovelService.AddImovelFromRegisteredOwner(imovel, proprietarioId);
+            Proprietario proprietario = _imovelService.GetProprietarioById(proprietarioId);
+            if (proprietario == null)
+                return NotFound(new { message = "Proprietário não encontrado." });
+            int id = _imovelService.AddImovelFromRegisteredOwner(imovel, proprietario);
             return CreatedAtRoute("GetImovelById", new { id }, imovel);
         }
 
