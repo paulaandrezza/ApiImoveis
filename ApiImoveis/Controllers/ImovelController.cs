@@ -11,9 +11,10 @@ namespace ApiImoveis.Controllers
         private readonly ImovelService _imovelService = new ImovelService();
 
         [HttpGet(Name = "GetAllImoveis")]
-        public IActionResult GetImoveis()
+        public IActionResult GetImoveis(bool erro)
         {
-            throw new Exception();
+            if (erro)
+                throw new Exception("Escolhi dar erro");
             return Ok(_imovelService.GetAllImoveis());
         }
 

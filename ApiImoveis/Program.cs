@@ -9,6 +9,12 @@ namespace ApiImoveis
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Ao invés de faz a injeção de dependencia em Imovel Controller com:
+            // private readonly ImovelService _imovelService = new ImovelService();
+            // pode fazer aqui com:
+            // builder.Services.AddSingleton<IImovelService, ImovelService>();
+            // Usando o Singleton não é necessário o uso de static dentro de ImovelService
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -43,7 +49,7 @@ namespace ApiImoveis
 
 
             // MiddlewareFactory de Log de erros
-            app.UseMiddleware<ExceptionHandlingMiddleware>();
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
             //app.Use(async (context, next) =>
             //{
             //    try
