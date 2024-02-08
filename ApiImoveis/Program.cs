@@ -49,6 +49,7 @@ namespace ApiImoveis
 
 
             // MiddlewareFactory de Log de erros
+            app.UseMiddleware<AuthorizationMiddleware>();
             app.UseMiddleware<ExceptionHandlerMiddleware>();
             //app.Use(async (context, next) =>
             //{
