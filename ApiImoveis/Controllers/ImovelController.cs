@@ -13,6 +13,7 @@ namespace ApiImoveis.Controllers
         [HttpGet(Name = "GetAllImoveis")]
         public IActionResult GetImoveis()
         {
+            throw new Exception();
             return Ok(_imovelService.GetAllImoveis());
         }
 
